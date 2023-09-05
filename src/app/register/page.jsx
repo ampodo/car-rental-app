@@ -7,9 +7,10 @@ import {
   Typography,
 } from "./MaterialTailwindComponents";
 import Link from "next/link";
+import axios from "axios";
 
 function Register() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const name = event.target.name.value;
@@ -19,14 +20,41 @@ function Register() {
     console.log("Name:", name);
     console.log("Email:", email);
     console.log("Password:", password);
+  
+   try {
+
+      const response = await axios.post("api/users/register", {
+
+         name,
+         email,
+         password,
+
+      });
+
+   
+      console.log("Registration successful:", response.data);
+
+
+   } catch (error) {
+
+      
+      console.error("Registration failed:", error);
+
+   }
+  
+  
+  
+  
   };
+
+
 
   return (
     <div className="flex justify-center items-center h-screen">
       <Card color="transparent" shadow={false} className="-mt-10">
         <div className="text-center">
           <img
-            src="./car-sign-up.jpg"
+            src="./sign-up.webp"
             alt="Registration-image"
             className="rounded-full object-cover w-36 h-36 mx-auto mb-2"
           />
