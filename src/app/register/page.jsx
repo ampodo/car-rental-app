@@ -1,53 +1,44 @@
 "use client";
-import {
-  Button,
-  Card,
-  Input,
-  Checkbox,
-  Typography,
-} from "./MaterialTailwindComponents";
+import React, { useState } from "react";
+import { Button, Card, Input, Typography } from "./MaterialTailwindComponents";
 import Link from "next/link";
 import axios from "axios";
+import { message } from "antd";
 
 function Register() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    const { name, email, password } = formData;
+    console.log("Form Data:", formData);
 
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Password:", password);
-  
-   try {
-
-      const response = await axios.post("api/users/register", {
-
-         name,
-         email,
-         password,
-
+    try {
+      const response = await axios.post("/api/users/register", {
+        name,
+        email,
+        password,
       });
 
-   
-      console.log("Registration successful:", response.data);
-
-
-   } catch (error) {
-
+      message.success(response.data.message);
+    } catch (error) {
+      message.error(error.response.data.message || error.message);
       
-      console.error("Registration failed:", error);
-
-   }
-  
-  
-  
-  
+    }
   };
-
-
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -78,6 +69,7 @@ function Register() {
               pattern="[A-Za-z]{3,}"
               title="Please enter at least 3 letters"
               required
+              onChange={handleChange}
             />
             <Input
               type="email"
@@ -86,6 +78,7 @@ function Register() {
               name="email"
               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
               required
+              onChange={handleChange}
             />
             <Input
               type="password"
@@ -95,6 +88,7 @@ function Register() {
               pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z!@#$%^&*\d]{8,}$"
               title="Password must contain at least 1 capital letter, 1 symbol, and be at least 8 characters long."
               required
+              onChange={handleChange}
             />
           </div>
 

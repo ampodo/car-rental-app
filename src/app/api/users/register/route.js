@@ -12,7 +12,7 @@ export async function POST(request) {
     // check if user already exists
     const userExists = await User.findOne({ email: reqBody.email });
     if (userExists) {
-      throw new Error("User already exists");
+      throw new Error("Email already in use");
     }
 
     // password hashing
@@ -26,11 +26,13 @@ export async function POST(request) {
 
     await User.create(reqBody);
 
-    return NextResponse.json({
-      message: "User created successfully",
-      status: 201,
-    });
+    return NextResponse.json(
+      {
+        message: "User created successfully",
+      },
+      { status: 201 }
+    );
   } catch (error) {
-    return NextResponse.json({ message: error.message, status: 400 });
+    return NextResponse.json({ message: error.message }, { status: 400 });
   }
 }

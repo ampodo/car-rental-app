@@ -2,9 +2,12 @@
 import React from "react";
 import { ThemeProvider } from '@material-tailwind/react';
 
+
 function LayoutProvider({ children }) {
   return (
+    
     <ThemeProvider>
+    
     <html lang="en">
       <head>
         <link

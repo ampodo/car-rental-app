@@ -31,7 +31,7 @@ function Login() {
             className="rounded-full object-cover w-36 h-36 mx-auto mb-2"
           />
           <Typography variant="h3" color="blue-gray">
-            Log In
+            Sign In
           </Typography>
           <Typography variant="h6" color="gray" className="mt-2 font-normal">
             Enter your credentials to proceed
