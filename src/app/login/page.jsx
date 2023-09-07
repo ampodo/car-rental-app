@@ -1,24 +1,50 @@
 "use client";
+import React, { useState } from "react";
 import {
   Button,
   Card,
   Input,
-  Checkbox,
   Typography,
 } from "./MaterialTailwindComponents";
 import Link from "next/link";
+import axios from "axios";
+import { message } from "antd";
+
 
 function Login() {
-  const handleSubmit = (event) => {
+
+  const [formData, setFormData] = useState({
+    
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-   
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    const { email, password } = formData;
+    console.log("Form Data:", formData);
+    
+    try {
+      const response = await axios.post("/api/users/login", {
+      
+        email,
+        password,
+      });
 
-   
-    console.log("Email:", email);
-    console.log("Password:", password);
+      message.success(response.data.message);
+    } catch (error) {
+      message.error(error.response.data.message || error.message);
+    }
+  
   };
 
   return (
@@ -50,6 +76,7 @@ function Login() {
               name="email"
               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
               required
+              onChange={handleChange}
             />
             <Input
               type="password"
@@ -59,6 +86,7 @@ function Login() {
               pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z!@#$%^&*\d]{8,}$"
               title="Password must contain at least 1 capital letter, 1 symbol, and be at least 8 characters long."
               required
+              onChange={handleChange}
             />
           </div>
 

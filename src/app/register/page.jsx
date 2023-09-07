@@ -36,7 +36,6 @@ function Register() {
       message.success(response.data.message);
     } catch (error) {
       message.error(error.response.data.message || error.message);
-      
     }
   };
 
