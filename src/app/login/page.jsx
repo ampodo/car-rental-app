@@ -1,20 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Button,
-  Card,
-  Input,
-  Typography,
-} from "./MaterialTailwindComponents";
+import { Button, Card, Input, Typography } from "./MaterialTailwindComponents";
 import Link from "next/link";
 import axios from "axios";
 import { message } from "antd";
-
+import { useRouter } from "next/navigation";
 
 function Login() {
-
+  const router = useRouter();
   const [formData, setFormData] = useState({
-    
     email: "",
     password: "",
   });
@@ -32,19 +26,18 @@ function Login() {
 
     const { email, password } = formData;
     console.log("Form Data:", formData);
-    
+
     try {
       const response = await axios.post("/api/users/login", {
-      
         email,
         password,
       });
 
       message.success(response.data.message);
+      router.push("/");
     } catch (error) {
       message.error(error.response.data.message || error.message);
     }
-  
   };
 
   return (
@@ -68,7 +61,6 @@ function Login() {
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
         >
           <div className="mb-4 flex flex-col gap-6">
-           
             <Input
               type="email"
               size="lg"
