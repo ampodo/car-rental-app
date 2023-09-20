@@ -1,5 +1,10 @@
 {
   "/page": "app/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/api/users/currentuser/route": "app/api/users/currentuser/route.js"
+  "/profile/page": "app/profile/page.js",
+  "/register/page": "app/register/page.js",
+  "/login/page": "app/login/page.js",
+  "/api/users/currentuser/route": "app/api/users/currentuser/route.js",
+  "/api/users/logout/route": "app/api/users/logout/route.js",
+  "/api/users/login/route": "app/api/users/login/route.js"
 }

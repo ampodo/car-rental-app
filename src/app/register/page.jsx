@@ -4,8 +4,12 @@ import { Button, Card, Input, Typography } from "./MaterialTailwindComponents";
 import Link from "next/link";
 import axios from "axios";
 import { message } from "antd";
+import {useDispatch } from "react-redux";
+import { SetLoading } from "@/redux/loadersSlice";
 
 function Register() {
+
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,6 +31,8 @@ function Register() {
     console.log("Form Data:", formData);
 
     try {
+
+      dispatch(SetLoading(true));
       const response = await axios.post("/api/users/register", {
         name,
         email,
@@ -36,6 +42,8 @@ function Register() {
       message.success(response.data.message);
     } catch (error) {
       message.error(error.response.data.message || error.message);
+    } finally {
+      dispatch(SetLoading(false));
     }
   };
 

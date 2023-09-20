@@ -2,9 +2,16 @@
 import React from "react";
 import { ThemeProvider } from "@material-tailwind/react";
 import { NavbarSimple } from "./Navbar";
+import { useSelector, useDispatch } from "react-redux";
+import Spinner from "./Spinner";
+import { SetLoading } from "@/redux/loadersSlice";
 
 
 function LayoutProvider({ children }) {
+
+  const {loading} = useSelector((state) => state.loaders);
+
+   
   return (
     <ThemeProvider>
       <html lang="en">
@@ -19,10 +26,11 @@ function LayoutProvider({ children }) {
           ></link>
         </head>
         <body className="font-sans">
+         {loading && <Spinner />}
           <div className="header">
             <NavbarSimple />
           </div>
-
+           
           <div>{children}</div>
         </body>
       </html>

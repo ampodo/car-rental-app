@@ -5,14 +5,17 @@ import Link from "next/link";
 import axios from "axios";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
+import {useDispatch } from "react-redux";
+import { SetLoading } from "@/redux/loadersSlice";
 
 function Login() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -28,6 +31,8 @@ function Login() {
     console.log("Form Data:", formData);
 
     try {
+
+      dispatch(SetLoading(true));
       const response = await axios.post("/api/users/login", {
         email,
         password,
@@ -37,6 +42,8 @@ function Login() {
       router.push("/");
     } catch (error) {
       message.error(error.response.data.message || error.message);
+    } finally {
+      dispatch(SetLoading(false));
     }
   };
 
@@ -66,7 +73,7 @@ function Login() {
               size="lg"
               label="Email"
               name="email"
-              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+              pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
               required
               onChange={handleChange}
             />

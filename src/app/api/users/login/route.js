@@ -26,7 +26,7 @@ export async function POST(request) {
     }
 
     const response = NextResponse.json({
-      message: "Login successful",
+      message: "You are logged in",
     });
 
     // create token
