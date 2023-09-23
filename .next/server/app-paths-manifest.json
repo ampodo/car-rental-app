@@ -1,1 +1,8 @@
-{}
+{
+  "/page": "app/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/login/page": "app/login/page.js",
+  "/api/users/logout/route": "app/api/users/logout/route.js",
+  "/api/users/login/route": "app/api/users/login/route.js",
+  "/api/users/currentuser/route": "app/api/users/currentuser/route.js"
+}

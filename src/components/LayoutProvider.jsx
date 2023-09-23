@@ -2,10 +2,8 @@
 import React from "react";
 import { ThemeProvider } from "@material-tailwind/react";
 import { NavbarSimple } from "./Navbar";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import Spinner from "./Spinner";
-import { SetLoading } from "@/redux/loadersSlice";
-
 
 function LayoutProvider({ children }) {
 
