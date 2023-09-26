@@ -1,8 +1,66 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Input, Button } from "@material-tailwind/react";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { SetLoading } from "@/redux/loadersSlice";
+import { message } from "antd";
 
 function Cars() {
   const [showModal, setShowModal] = React.useState(false);
+
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    brand: "",
+    price: "",
+    fuelType: "",
+    image: "",
+  });
+  
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === "fuelType") {
+      setFormData({
+        ...formData,
+        fuelType: value,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { name, brand, price, image, fuelType } = formData;
+    console.log("Form Data:", formData);
+
+    try {
+      dispatch(SetLoading(true));
+      let response = null;
+
+      response = await axios.post("/api/cars", {
+        name,
+        brand,
+        price,
+        fuelType,
+        image,
+      });
+
+      message.success(response.data.message);
+      setShowModal(false);
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      dispatch(SetLoading(false));
+    }
+  };
 
   return (
     <>
@@ -25,80 +83,96 @@ function Cars() {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 mx-4">
-                  <form className="mt-4 mb-2">
+                  <form className="mt-4 mb-2" onSubmit={handleSubmit}>
                     <div className="mb-4">
                       <Input
                         size="lg"
                         label="Car name"
                         name="name"
                         type="text"
-                        pattern="[A-Za-z]{3,}"
-                        title="Please enter at least 3 letters"
+                        pattern="[A-Za-z0-9-]{3,}"
+                        minLength="3"
+                        title="Please fill this field"
+                        required
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <div className="mb-4 flex space-x-4">
+                      <div className="flex-1">
+                        <Input
+                          size="lg"
+                          label="Brand"
+                          name="brand"
+                          type="text"
+                          pattern="[A-Za-z0-9-]{3,}"
+                          minLength="3"
+                          title="Please fill this field"
+                          required
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="flex-1">
+                        <select
+                          className="w-40"
+                          name="fuelType"
+                          onChange={handleChange}
+                          value={formData.fuelType}
+                          required
+                        >
+                          <option value="">Select fuel type</option>
+                          <option value="Petrol">Petrol</option>
+                          <option value="Diesel">Diesel</option>
+                          <option value="Electric">Electric</option>
+                          <option value="Hybrid">Hybrid</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <Input
+                        size="lg"
+                        label="Price per hour"
+                        name="price"
+                        type="number"
+                        min="5"
+                        onChange={handleChange}
                         required
                       />
                     </div>
 
-                    <div className="mb-4">
                     <Input
-                      size="lg"
-                      label="Brand"
-                      name="brand"
-                      type="text"
-                      pattern="[A-Za-z]{3,}"
-                      title="Please enter at least 3 letters"
-                      required
-                    />
-                     </div>
-
-                     <div className="mb-4">
-                     <Input
-                      size="lg"
-                      label="Rent per hour"
-                      name="rent"
-                      type="number"
-                      pattern="[A-Za-z]{3,}"
-                      required
-                    /> 
-                      </div>
-
-                      <Input
                       size="lg"
                       label="Car image"
                       name="image"
-                      type="text"
+                      type="file"
+                      accept=".jpg, .jpeg, .png"
+                      onChange={handleChange}
                       required
-                    /> 
+                    />
 
-                    <select className="mt-4" required>
-                    <option value="">Select fuel type</option>
-                      <option value="Petrol">Petrol</option>
-                      <option value="Petrol">Diesel</option>
-                      <option value="Petrol">Electric</option>
-                      <option value="Petrol">Hybrid</option>
-                    </select>
+                    <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                      <button
+                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => setShowModal(false)}
+                      >
+                        Close
+                      </button>
+                      <button
+                        className="bg-emerald-500 text-black active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="submit"
+                      >
+                        Save Changes
+                      </button>
+                    </div>
+                    {/*form ending*/}
                   </form>
-                </div>
-                {/*footer*/}
-                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Close
-                  </button>
-                  <button
-                    className="bg-emerald-500 text-black active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Save Changes
-                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
     </>

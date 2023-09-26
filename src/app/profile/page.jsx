@@ -68,7 +68,7 @@ function Profile() {
   
   const isAdmin = currentUser && currentUser.isAdmin;
 
- 
+  
   return (
     currentUser && (
       <div className="p-10 mt-4">

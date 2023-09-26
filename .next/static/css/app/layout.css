@@ -653,9 +653,6 @@ video {
 .z-20 {
   z-index: 20;
 }
-.z-40 {
-  z-index: 40;
-}
 .z-50 {
   z-index: 50;
 }
@@ -703,22 +700,6 @@ video {
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-}
-.my-12 {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-.mx-6 {
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-}
-.mx-5 {
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
 }
 .-ml-1 {
   margin-left: -0.25rem;
@@ -955,6 +936,9 @@ video {
 .w-4 {
   width: 1rem;
 }
+.w-40 {
+  width: 10rem;
+}
 .w-5 {
   width: 1.25rem;
 }
@@ -1058,8 +1042,8 @@ video {
 .max-w-screen-lg {
   max-width: 960px;
 }
-.max-w-6xl {
-  max-width: 72rem;
+.flex-1 {
+  flex: 1 1 0%;
 }
 .flex-none {
   flex: none;
@@ -1203,6 +1187,11 @@ video {
 }
 .gap-6 {
   gap: 1.5rem;
+}
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .divide-x > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-x-reverse: 0;
@@ -1966,12 +1955,6 @@ video {
 .p-6 {
   padding: 1.5rem;
 }
-.p-12 {
-  padding: 3rem;
-}
-.p-8 {
-  padding: 2rem;
-}
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1979,6 +1962,10 @@ video {
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+.px-28 {
+  padding-left: 7rem;
+  padding-right: 7rem;
 }
 .px-3 {
   padding-left: 0.75rem;
@@ -2031,34 +2018,6 @@ video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-.px-12 {
-  padding-left: 3rem;
-  padding-right: 3rem;
-}
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-.py-10 {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-.px-20 {
-  padding-left: 5rem;
-  padding-right: 5rem;
-}
-.px-28 {
-  padding-left: 7rem;
-  padding-right: 7rem;
-}
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
 }
 .py-6 {
   padding-top: 1.5rem;
@@ -2477,9 +2436,6 @@ video {
 }
 .opacity-10 {
   opacity: 0.1;
-}
-.opacity-25 {
-  opacity: 0.25;
 }
 .opacity-50 {
   opacity: 0.5;
