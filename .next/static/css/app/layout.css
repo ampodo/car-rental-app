@@ -1185,6 +1185,9 @@ video {
 .gap-4 {
   gap: 1rem;
 }
+.gap-5 {
+  gap: 1.25rem;
+}
 .gap-6 {
   gap: 1.5rem;
 }
@@ -2720,7 +2723,7 @@ body,
 
 * {
 
-      font-family: "Open-sans", sans-serif;
+    font-family: "Open Sans", sans-serif;
 
 }
 
@@ -2740,6 +2743,34 @@ select:focus {
   outline: none !important;
   border: 1px solid #333333 !important;
   box-shadow: none !important;
+}
+
+a {
+  color: black !important;
+}
+
+
+.ant-pagination .ant-pagination-item-active {
+  font-weight: 600;
+  background-color: #ffffff;
+  border-color: black;
+}
+
+.ant-pagination .ant-pagination-item-active:hover {
+  border-color: black;
+}
+
+
+/* Tooltip */
+
+.custom-tooltip {
+  font-size: 9px;
+  font-family: "Open Sans", sans-serif;
+  padding: 6px 8px;
+  letter-spacing: 2px;
+  background-color: #212121;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .before\:pointer-events-none::before {
@@ -5631,7 +5662,6 @@ select:focus {
 .\[\&\:\:-webkit-slider-thumb\]\:\[-webkit-appearance\:none\]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
-
 
 
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
