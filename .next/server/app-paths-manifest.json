@@ -1,8 +1,6 @@
 {
   "/page": "app/page.js",
   "/profile/page": "app/profile/page.js",
-  "/login/page": "app/login/page.js",
   "/api/cars/route": "app/api/cars/route.js",
-  "/api/users/logout/route": "app/api/users/logout/route.js",
-  "/api/users/currentuser/route": "app/api/users/currentuser/route.js"
+  "/api/cars/[carid]/route": "app/api/cars/[carid]/route.js"
 }

@@ -1,12 +1,7 @@
 "use client";
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  Tabs,
-  TabsHeader,
-  TabsBody,
-  Tab,
-} from "@material-tailwind/react";
+import { Tabs, TabsHeader, TabsBody, Tab } from "@material-tailwind/react";
 import General from "@/components/profileComponents/General";
 import UserBookings from "@/components/profileComponents/UserBookings";
 import Cars from "@/components/profileComponents/Cars";
@@ -31,12 +26,10 @@ function Profile() {
     {
       label: "General",
       value: "general",
-     
     },
     {
       label: "Your Bookings",
       value: "bookings",
-      
     },
   ];
 
@@ -44,31 +37,26 @@ function Profile() {
     {
       label: "General",
       value: "general",
-      
     },
 
     {
       label: "Cars",
       value: "cars",
-      
     },
 
     {
       label: "Users",
       value: "users",
-      
     },
 
     {
       label: "All Bookings",
       value: "allbookings",
-      
     },
   ];
-  
+
   const isAdmin = currentUser && currentUser.isAdmin;
 
-  
   return (
     currentUser && (
       <div className="p-10 mt-4">

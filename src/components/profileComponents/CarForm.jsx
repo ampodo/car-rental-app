@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { Input, Button } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
@@ -7,21 +6,20 @@ import { SetLoading } from "@/redux/loadersSlice";
 import { message } from "antd";
 
 function CarForm(props) {
-  const [showModal, setShowModal] = React.useState(false);
+  const { showModal, setShowModal, reloadData, selectedCar } = props;
 
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
-    name: "",
-    brand: "",
-    price: "",
-    fuelType: "",
-    image: "",
+    name: selectedCar ? selectedCar.name : "",
+    brand: selectedCar ? selectedCar.brand : "",
+    price: selectedCar ? selectedCar.price : "",
+    fuelType: selectedCar ? selectedCar.fuelType : "",
+    image: selectedCar ? selectedCar.image : "",
   });
-  
+
   const handleChange = (event) => {
     const { name, value, type, files } = event.target;
-  
     if (name === "fuelType") {
       setFormData({
         ...formData,
@@ -31,7 +29,6 @@ function CarForm(props) {
       // Handle file upload
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
-  
       reader.onload = () => {
         setFormData({
           ...formData,
@@ -45,42 +42,39 @@ function CarForm(props) {
       });
     }
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const { name, brand, price, image, fuelType } = formData;
-    console.log("Form Data:", formData);
-
     try {
       dispatch(SetLoading(true));
+
       let response = null;
 
-      response = await axios.post("/api/cars", {
-        name,
-        brand,
-        price,
-        fuelType,
-        image,
-      });
-      
+      if (selectedCar) {
+        formData._id = selectedCar._id;
+        response = await axios.put(`/api/cars/${selectedCar._id}`, formData);
+      } else {
+        response = await axios.post("/api/cars", formData);
+      }
+
       message.success(response.data.message);
       setShowModal(false);
 
-       // Call the onCarAdded function to update the car data in the parent component
-       if (props.onCarAdded) {
-      props.onCarAdded(response.data.data);
-       }
-      
+      // Call the onCarAdded function to update the car data in the parent component
+      if (props.onCarAdded) {
+        props.onCarAdded(response.data.data);
+      }
 
+      if (reloadData) {
+        reloadData();
+      }
     } catch (error) {
       message.error(error.message);
     } finally {
       dispatch(SetLoading(false));
     }
   };
-   
-  
 
   return (
     <>
@@ -97,8 +91,8 @@ function CarForm(props) {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-center justify-center px-28 py-6 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-2xl font-normal  uppercase">
-                    Add a new car
+                  <h3 className="text-2xl font-normal uppercase">
+                    {selectedCar ? "Edit Car" : "Add a new car"}
                   </h3>
                 </div>
                 {/*body*/}
@@ -117,7 +111,6 @@ function CarForm(props) {
                         onChange={handleChange}
                       />
                     </div>
-
                     <div className="mb-4 flex space-x-4">
                       <div className="flex-1">
                         <Input
@@ -132,7 +125,6 @@ function CarForm(props) {
                           onChange={handleChange}
                         />
                       </div>
-
                       <div className="flex-1">
                         <select
                           className="w-40"
@@ -149,7 +141,6 @@ function CarForm(props) {
                         </select>
                       </div>
                     </div>
-
                     <div className="mb-4">
                       <Input
                         size="lg"
@@ -161,7 +152,6 @@ function CarForm(props) {
                         required
                       />
                     </div>
-
                     <Input
                       size="lg"
                       label="Car image"
@@ -171,7 +161,6 @@ function CarForm(props) {
                       onChange={handleChange}
                       required
                     />
-
                     <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                       <button
                         className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -198,10 +187,4 @@ function CarForm(props) {
     </>
   );
 }
-
 export default CarForm;
-
-
-
-
-
