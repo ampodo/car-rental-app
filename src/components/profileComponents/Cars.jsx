@@ -63,7 +63,7 @@ function Cars() {
           alt="car"
           width="80"
           height="80"
-          style={{ borderRadius: "10%" }}
+          style={{ borderRadius: "5%" }}
         />
       ),
     },
