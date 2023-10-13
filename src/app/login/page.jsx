@@ -5,7 +5,7 @@ import Link from "next/link";
 import axios from "axios";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
-import {useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SetLoading } from "@/redux/loadersSlice";
 
 function Login() {
@@ -15,7 +15,7 @@ function Login() {
     email: "",
     password: "",
   });
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -31,7 +31,6 @@ function Login() {
     console.log("Form Data:", formData);
 
     try {
-
       dispatch(SetLoading(true));
       const response = await axios.post("/api/users/login", {
         email,
@@ -52,20 +51,23 @@ function Login() {
       <Card color="transparent" shadow={false} className="-mt-10">
         <div className="text-center">
           <img
-            src="./medium-map.webp"
-            alt="Registration-image"
-            className="rounded-full object-cover w-36 h-36 mx-auto mb-2"
+            className="mx-auto w-2/3"
+            src="./car-logo1.png"
+            alt="Car-image"
           />
-          <Typography variant="h3" color="blue-gray">
+          <Typography className="mt-4" variant="h3" color="blue-gray">
             Sign In
           </Typography>
-          <Typography variant="h6" color="gray" className="mt-2 font-normal">
-            Enter your credentials to proceed
+          <Typography
+            color="gray"
+            className="mt-2 font-normal text-base lg:text-lg"
+          >
+            Enter your credentials and start renting cars
           </Typography>
         </div>
         <form
           onSubmit={handleSubmit}
-          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 ml-auto mr-auto"
         >
           <div className="mb-4 flex flex-col gap-6">
             <Input

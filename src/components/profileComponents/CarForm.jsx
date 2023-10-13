@@ -144,7 +144,7 @@ function CarForm(props) {
                     <div className="mb-4">
                       <Input
                         size="lg"
-                        label="Price per hour"
+                        label="Price per month"
                         name="price"
                         type="number"
                         min="5"

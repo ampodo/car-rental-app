@@ -2,10 +2,8 @@
   "/page": "app/page.js",
   "/login/page": "app/login/page.js",
   "/profile/page": "app/profile/page.js",
-  "/register/page": "app/register/page.js",
-  "/api/cars/route": "app/api/cars/route.js",
   "/cars/[carid]/page": "app/cars/[carid]/page.js",
-  "/api/users/currentuser/route": "app/api/users/currentuser/route.js",
+  "/api/cars/route": "app/api/cars/route.js",
   "/api/users/logout/route": "app/api/users/logout/route.js",
-  "/api/users/login/route": "app/api/users/login/route.js"
+  "/api/users/currentuser/route": "app/api/users/currentuser/route.js"
 }

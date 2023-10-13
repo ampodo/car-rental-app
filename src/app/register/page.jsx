@@ -4,11 +4,10 @@ import { Button, Card, Input, Typography } from "./MaterialTailwindComponents";
 import Link from "next/link";
 import axios from "axios";
 import { message } from "antd";
-import {useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SetLoading } from "@/redux/loadersSlice";
 
 function Register() {
-
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
@@ -31,7 +30,6 @@ function Register() {
     console.log("Form Data:", formData);
 
     try {
-
       dispatch(SetLoading(true));
       const response = await axios.post("/api/users/register", {
         name,
@@ -52,20 +50,24 @@ function Register() {
       <Card color="transparent" shadow={false} className="-mt-10">
         <div className="text-center">
           <img
-            src="./sign-up.webp"
-            alt="Registration-image"
-            className="rounded-full object-cover w-36 h-36 mx-auto mb-2"
+            className="mx-auto w-2/3"
+            src="./car-logo1.png"
+            alt="Car-image"
           />
-          <Typography variant="h3" color="blue-gray">
+
+          <Typography className="mt-4" variant="h3" color="blue-gray">
             Sign Up
           </Typography>
-          <Typography variant="h6" color="gray" className="mt-2 font-normal">
+          <Typography
+            color="gray"
+            className="mt-2 font-normal text-base lg:text-lg"
+          >
             Please register to start renting cars with us
           </Typography>
         </div>
         <form
           onSubmit={handleSubmit}
-          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 ml-auto mr-auto"
         >
           <div className="mb-4 flex flex-col gap-6">
             <Input

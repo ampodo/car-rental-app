@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import {
   Navbar,
@@ -13,6 +12,7 @@ import { message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { SetCurrentUser } from "@/redux/userSlice";
 import { SetLoading } from "@/redux/loadersSlice";
+import Image from "next/image";
 
 function NavList() {
   const { currentUser } = useSelector((state) => state.users);
@@ -58,15 +58,10 @@ function NavList() {
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       {currentUser ? (
-        <Typography
-          as="li"
-          variant="h6"
-          color="blue-gray"
-          className="p-1 font-medium"
-        >
+        <Typography as="li" variant="h5" className="p-1 font-medium">
           <a
             href="#"
-            className="flex items-center hover:text-blue-500 transition-colors"
+            className="user-name hover-blue"
             onClick={handleUsernameClick}
           >
             {currentUser.name}
@@ -74,23 +69,13 @@ function NavList() {
         </Typography>
       ) : null}
 
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        <a
-          href="#"
-          className="flex items-center hover:text-blue-500 transition-colors"
-        >
-          <i
-            className="ri-logout-circle-r-line"
-            style={{ fontSize: "24px" }}
-            onClick={onLogout}
-          ></i>
-        </a>
-      </Typography>
+      <a href="#" className="flex items-center">
+        <i
+          className="ri-logout-circle-r-line hover:text-blue-500 transition-colors duration-300 ease-in-out"
+          style={{ fontSize: "24px" }}
+          onClick={onLogout}
+        ></i>
+      </a>
     </ul>
   );
 }
@@ -115,19 +100,24 @@ export function NavbarSimple() {
   return (
     <div>
       {pathname !== "/login" && pathname !== "/register" && (
-        <Navbar className="mx-auto max-w-full px-6 py-3 ">
+        <Navbar className="mx-auto max-w-full px-6 py-3 rounded-none">
           <div className="flex items-center justify-between text-blue-gray-900">
             <Typography
               as="a"
               href="#"
-              variant="h6"
+              variant="h5"
               className="mr-4 cursor-pointer py-1.5"
               cursor="pointer"
               onClick={() => {
                 router.push("/");
               }}
             >
-              Car Rentals
+              <Image
+                src="/header-logo.png"
+                width={150}
+                height={65}
+                alt="Picture of the author"
+              />
             </Typography>
             <div className="hidden lg:block">
               <NavList />
