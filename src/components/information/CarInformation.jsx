@@ -1,12 +1,27 @@
 "use client";
 import React from "react";
+import moment from "moment";
 import {
   Accordion,
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
+import { Col, DatePicker, Row, message } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { SetLoading } from "@/redux/loadersSlice";
+
+const { RangePicker } = DatePicker;
 
 function CarInformation({ car }) {
+  const [fromSlot, setFromSlot] = React.useState(null);
+  const [toSlot, setToSlot] = React.useState(null);
+  const router = useRouter();
+  const { currentUser } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+
   const [openAcc1, setOpenAcc1] = React.useState(true);
   const [openAcc2, setOpenAcc2] = React.useState(true);
   const [openAcc3, setOpenAcc3] = React.useState(true);
@@ -15,13 +30,86 @@ function CarInformation({ car }) {
   const handleOpenAcc2 = () => setOpenAcc2((cur) => !cur);
   const handleOpenAcc3 = () => setOpenAcc3((cur) => !cur);
 
+  const bookNow = async () => {
+    const payload = {
+      car: car._id,
+      user: currentUser._id,
+      fromSlot,
+      toSlot,
+      totalHours: moment(toSlot).diff(moment(fromSlot), "hours"),
+      totalAmount: moment(toSlot).diff(moment(fromSlot), "hours") * car?.price,
+    };
+
+    try {
+      dispatch(SetLoading(true));
+      await axios.post("/api/bookings", payload);
+      message.success("Booking added successfully");
+      router.push("/profile");
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      dispatch(SetLoading(false));
+    }
+  };
+
   return (
-    <div className="mt-12">
+    <div className="mt-16">
       <img src={car?.image} className="mx-auto w-5/6 object-cover rounded" />
 
       <div className="grid justify-items-center mt-6">
         <h1 className="text-3xl font-bold mb-2">{car.brand}</h1>
         <h1 className="text-2xl text-slate-800 font-medium">{car.name}</h1>
+        {/* Buttons group */}
+
+        <div className="mt-6 flex justify-start gap-5">
+          <Button
+            variant="outlined"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            Go Back
+          </Button>
+
+          <Button
+            variant="gradient"
+            disabled={!fromSlot || !toSlot}
+            onClick={bookNow}
+          >
+            Book now
+          </Button>
+        </div>
+
+        <div className="mt-6 flex justify-center gap-5">
+          <RangePicker
+            showTime={{ format: "HH:mm" }}
+            format="YYYY-MM-DD HH:mm"
+            style={{ width: "300px", height: "60px" }}
+            onChange={(value) => {
+              setFromSlot(value[0].toDate());
+              setToSlot(value[1].toDate());
+            }}
+            disabledDate={(current) => {
+              return current && current < moment().endOf("day");
+            }}
+          />
+        </div>
+
+        {fromSlot && toSlot && (
+          <>
+            <div className="mt-6 flex flex-col justify-between gap-2">
+              <h1 className="text-base font-semibold text-slate-800">
+                Total Hours : {moment(toSlot).diff(moment(fromSlot), "hours")}
+              </h1>
+
+              <h1 className="text-base font-semibold text-slate-800">
+                Total Amount :{" "}
+                {moment(toSlot).diff(moment(fromSlot), "hours") * car?.price} €
+              </h1>
+            </div>
+          </>
+        )}
+
         <div className="mt-6">
           <Accordion open={openAcc1}>
             <AccordionHeader
@@ -40,7 +128,7 @@ function CarInformation({ car }) {
               className="sm:text-xl md:text-2xl"
               onClick={handleOpenAcc2}
             >
-              Price per month including insurance
+              Price per hour including insurance
             </AccordionHeader>
             <AccordionBody className="text-base md:text-xl text-slate-800 font-semibold">
               {car.price} €

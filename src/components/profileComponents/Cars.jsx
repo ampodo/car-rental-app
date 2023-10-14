@@ -80,7 +80,7 @@ function Cars() {
       dataIndex: "fuelType",
     },
     {
-      title: "Price per month €",
+      title: "Price per hour €",
       dataIndex: "price",
     },
     {

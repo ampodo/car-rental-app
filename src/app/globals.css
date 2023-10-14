@@ -83,3 +83,30 @@ a {
   font-weight: 700;
 }
 
+
+
+.ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner {
+  background-color: black !important;
+}
+
+
+
+.ant-btn-primary {
+background-color: black !important;
+border-color: black !important;
+
+
+}
+
+:where(.css-dev-only-do-not-override-1vr7spz).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  bottom: 0;
+  inset-inline-start: 0;
+  z-index: 1;
+  border: 1px solid white;
+  border-radius: 4px;
+  content: "";
+}
+

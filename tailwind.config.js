@@ -26,6 +26,17 @@ module.exports = withMT({
           800: '#354c5d',
           900: '#2c3e4d',
         },
+        sky: { // Use "sky" instead of "cyan"
+          100: '#E0FFFF',
+          200: '#B0E0E6',
+          300: '#87CEEB',
+          400: '#00BFFF',
+          500: '#1E90FF',
+          600: '#4682B4',
+          700: '#5F9EA0',
+          800: '#00CED1',
+          900: '#20B2AA',
+        },
         // Add more color variations as needed
       },
     },
