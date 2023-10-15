@@ -7,6 +7,7 @@ import { message } from "antd";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { SetLoading } from "@/redux/loadersSlice";
+import Image from "next/image";
 
 function Login() {
   const router = useRouter();
@@ -50,11 +51,13 @@ function Login() {
     <div className="flex justify-center items-center h-screen">
       <Card color="transparent" shadow={false} className="-mt-10">
         <div className="text-center">
-          <img
-            className="mx-auto w-2/3"
-            src="./car-logo1.png"
-            alt="Car-image"
-          />
+        <Image
+                className="mx-auto"
+                src="/car-logo1.png"
+                width={250}
+                height={75}
+                alt="Picture of the brand"
+              />
           <Typography className="mt-4" variant="h3" color="blue-gray">
             Sign In
           </Typography>

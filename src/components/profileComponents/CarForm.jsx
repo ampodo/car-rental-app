@@ -43,6 +43,20 @@ function CarForm(props) {
     }
   };
 
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setFormData({
+          ...formData,
+          image: reader.result, // Store the data URL in formData
+        });
+      };
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { name, brand, price, image, fuelType } = formData;
@@ -152,16 +166,22 @@ function CarForm(props) {
                         required
                       />
                     </div>
-                    <Input
-                      size="lg"
-                      label="Car image"
-                      name="image"
+
+                    <label className="hidden" htmlFor="file-upload">
+                      Image
+                    </label>
+                    <input
+                      id="file-upload"
                       type="file"
                       accept=".jpg, .jpeg, .png"
-                      onChange={handleChange}
-                      required
+                      className="hidden"
+                      onChange={handleImageUpload}
                     />
-                    <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                    <label htmlFor="file-upload" className="cursor-pointer">
+                      <img src="/80icon.png" alt="Upload Icon" />
+                    </label>
+
+                    <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b mt-2">
                       <button
                         className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
