@@ -4,6 +4,8 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { NavbarSimple } from "./Navbar";
 import { useSelector} from "react-redux";
 import Spinner from "./Spinner";
+import { SimpleFooter } from "./Footer";
+
 
 function LayoutProvider({ children }) {
 
@@ -30,6 +32,9 @@ function LayoutProvider({ children }) {
           </div>
            
           <div>{children}</div>
+          <div className="mt-auto">
+          <SimpleFooter />
+          </div>
         </body>
       </html>
     </ThemeProvider>

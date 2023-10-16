@@ -15,7 +15,7 @@ function Register() {
     email: "",
     password: "",
   });
-
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -45,10 +45,10 @@ function Register() {
       dispatch(SetLoading(false));
     }
   };
-
+   
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card color="transparent" shadow={false} className="-mt-10">
+       <Card color="transparent" className="mt-6 mb-16 p-14 rounded card-with-shadow">
         <div className="text-center">
         <Image
                 className="mx-auto"

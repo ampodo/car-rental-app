@@ -37,7 +37,18 @@ module.exports = withMT({
           800: '#00CED1',
           900: '#20B2AA',
         },
-        // Add more color variations as needed
+        zinc: { // Add the "zinc" color palette
+          100: '#F5F5F5',
+          200: '#E0E0E0',
+          300: '#C0C0C0',
+          400: '#A9A9A9',
+          500: '#808080',
+          600: '#696969',
+          700: '#555555',
+          800: '#333333',
+          900: '#1A1A1A',
+        },
+       // Add more color variations as needed
       },
     },
   },

@@ -59,6 +59,9 @@ function Profile() {
 
   return (
     currentUser && (
+
+      <div className="flex flex-col min-h-screen">
+      <div className="flex-grow">
       <div className="p-10 mt-4">
         {isAdmin ? (
           // Admin Tabs
@@ -113,6 +116,8 @@ function Profile() {
             </TabsBody>
           </Tabs>
         )}
+      </div>
+      </div>
       </div>
     )
   );
