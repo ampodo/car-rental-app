@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import moment from "moment";
 import {
   Accordion,
@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
-import { Col, DatePicker, Row, message } from "antd";
+import { DatePicker, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { SetLoading } from "@/redux/loadersSlice";
@@ -16,6 +16,7 @@ import { SetLoading } from "@/redux/loadersSlice";
 const { RangePicker } = DatePicker;
 
 function CarInformation({ car }) {
+  const [isSlotAvailable, setIsSlotAvailable] = React.useState(false);
   const [fromSlot, setFromSlot] = React.useState(null);
   const [toSlot, setToSlot] = React.useState(null);
   const router = useRouter();
@@ -52,6 +53,31 @@ function CarInformation({ car }) {
     }
   };
 
+  const checkAvailability = async () => {
+    try {
+      dispatch(SetLoading(true));
+      const response = await axios.post("/api/checkAvailability", {
+        car: car._id,
+        fromSlot,
+        toSlot,
+      });
+      if (response.data.success) {
+        message.success("Slot Available");
+        setIsSlotAvailable(true);
+      } else {
+        throw new Error("Slot Not Available");
+      }
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      dispatch(SetLoading(false));
+    }
+  };
+
+  useEffect(() => {
+    setIsSlotAvailable(false);
+  }, [fromSlot, toSlot]);
+
   return (
     <div className="mt-16">
       <img src={car?.image} className="mx-auto w-5/6 object-cover rounded" />
@@ -61,7 +87,31 @@ function CarInformation({ car }) {
         <h1 className="text-2xl text-slate-800 font-medium">{car.name}</h1>
         {/* Buttons group */}
 
-        <div className="mt-6 flex justify-start gap-5">
+        <div className="mt-8 flex justify-center gap-5">
+          <RangePicker
+            showTime={{ format: "HH:mm" }}
+            format="YYYY-MM-DD HH:mm"
+            style={{ width: "300px", height: "50px" }}
+            onChange={(value) => {
+              setFromSlot(value[0].toDate());
+              setToSlot(value[1].toDate());
+            }}
+            disabledDate={(current) => {
+              return current && current < moment().endOf("day");
+            }}
+          />
+
+          <Button
+            variant="gradient"
+            size="sm"
+            disabled={!fromSlot || !toSlot}
+            onClick={checkAvailability}
+          >
+            Check Availability
+          </Button>
+        </div>
+
+        <div className="mt-12 flex justify-start gap-5">
           <Button
             variant="outlined"
             onClick={() => {
@@ -73,28 +123,12 @@ function CarInformation({ car }) {
 
           <Button
             variant="gradient"
-            disabled={!fromSlot || !toSlot}
+            disabled={!fromSlot || !toSlot || !isSlotAvailable}
             onClick={bookNow}
           >
             Book now
           </Button>
         </div>
-
-        <div className="mt-6 flex justify-center gap-5">
-          <RangePicker
-            showTime={{ format: "HH:mm" }}
-            format="YYYY-MM-DD HH:mm"
-            style={{ width: "300px", height: "60px" }}
-            onChange={(value) => {
-              setFromSlot(value[0].toDate());
-              setToSlot(value[1].toDate());
-            }}
-            disabledDate={(current) => {
-              return current && current < moment().endOf("day");
-            }}
-          />
-        </div>
-
         {fromSlot && toSlot && (
           <>
             <div className="mt-6 flex flex-col justify-between gap-2">
