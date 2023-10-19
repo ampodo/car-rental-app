@@ -12,6 +12,7 @@ import { DatePicker, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { SetLoading } from "@/redux/loadersSlice";
+import StripeCheckout from "react-stripe-checkout";
 
 const { RangePicker } = DatePicker;
 
@@ -31,7 +32,7 @@ function CarInformation({ car }) {
   const handleOpenAcc2 = () => setOpenAcc2((cur) => !cur);
   const handleOpenAcc3 = () => setOpenAcc3((cur) => !cur);
 
-  const bookNow = async () => {
+  const bookNow = async (token) => {
     const payload = {
       car: car._id,
       user: currentUser._id,
@@ -39,6 +40,7 @@ function CarInformation({ car }) {
       toSlot,
       totalHours: moment(toSlot).diff(moment(fromSlot), "hours"),
       totalAmount: moment(toSlot).diff(moment(fromSlot), "hours") * car?.price,
+      token,
     };
 
     try {
@@ -121,13 +123,23 @@ function CarInformation({ car }) {
             Go Back
           </Button>
 
-          <Button
-            variant="gradient"
-            disabled={!fromSlot || !toSlot || !isSlotAvailable}
-            onClick={bookNow}
+          <StripeCheckout
+            stripeKey="pk_test_51MikCLIYIDFW18nrUFirIoc6zkHDn6gkXK6ldBc7pf2tOAL51C9UCRaweV0EyCulz1XnzGTDhJ6Lh9HmgKDUu4Rf00RvLHIuZI"
+            token={bookNow}
+            currency="EUR"
+            key={process.env.stripe_publishable_key}
+            amount={
+              moment(toSlot).diff(moment(fromSlot), "hours") * car?.price * 100
+            }
+            shippingAddress
           >
-            Book now
-          </Button>
+            <Button
+              variant="gradient"
+              disabled={!fromSlot || !toSlot || !isSlotAvailable}
+            >
+              Book now
+            </Button>
+          </StripeCheckout>
         </div>
         {fromSlot && toSlot && (
           <>
