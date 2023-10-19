@@ -7,15 +7,17 @@ import { message } from "antd";
 import { useDispatch } from "react-redux";
 import { SetLoading } from "@/redux/loadersSlice";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 function Register() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -39,24 +41,28 @@ function Register() {
       });
 
       message.success(response.data.message);
+      router.push("/login");
     } catch (error) {
       message.error(error.response.data.message || error.message);
     } finally {
       dispatch(SetLoading(false));
     }
   };
-   
+  
   return (
     <div className="flex justify-center items-center h-screen">
-       <Card color="transparent" className="mt-6 mb-16 p-14 rounded card-with-shadow">
+      <Card
+        color="transparent"
+        className="mt-6 mb-16 p-14 rounded card-with-shadow"
+      >
         <div className="text-center">
-        <Image
-                className="mx-auto"
-                src="/car-logo1.png"
-                width={250}
-                height={75}
-                alt="Picture of the brand"
-              />
+          <Image
+            className="mx-auto"
+            src="/car-logo1.png"
+            width={250}
+            height={75}
+            alt="Picture of the brand"
+          />
 
           <Typography className="mt-4" variant="h3" color="blue-gray">
             Sign Up

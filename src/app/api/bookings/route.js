@@ -46,3 +46,22 @@ export async function POST(request) {
     }
   }
 
+
+
+  export async function GET(request) {
+    try {
+      await validateTokenAndGetUserId(request);
+      const { searchParams } = new URL(request.url);
+      const user = searchParams.get("user");
+      const bookings = await Booking.find({ user })
+        .populate("car")
+        .populate("user");
+      return NextResponse.json({ data: bookings });
+    } catch (error) {
+      return NextResponse.json(
+        { message: error.message, error },
+        { status: 400 }
+      );
+    }
+  }
+

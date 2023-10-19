@@ -5,8 +5,8 @@ import CarInformation from "@/components/information/CarInformation";
 
 export async function getCar(carid) {
   try {
-    const cookeStore = cookies();
-    const token = cookeStore.get("token").value;
+    const cookieStore = cookies();
+    const token = cookieStore.get("token").value;
     const response = await axios.get(
       `${process.env.domain}/api/cars/${carid}`,
       {
