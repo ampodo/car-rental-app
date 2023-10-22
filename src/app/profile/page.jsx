@@ -3,10 +3,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Tabs, TabsHeader, TabsBody, Tab } from "@material-tailwind/react";
 import General from "@/components/profileComponents/General";
-import UserBookings from "@/components/profileComponents/UserBookings";
+import BookingsTable from "@/components/profileComponents/BookingsTable";
 import Cars from "@/components/profileComponents/Cars";
 import Users from "@/components/profileComponents/Users";
-import AllBookings from "@/components/profileComponents/AllBookings";
+
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.users);
@@ -15,10 +15,10 @@ function Profile() {
 
   const tabComponents = {
     general: <General />,
-    bookings: <UserBookings />,
+    bookings: <BookingsTable />,
     cars: <Cars />,
     users: <Users />,
-    allbookings: <AllBookings />,
+   
     // Add more tab values
   };
 
@@ -48,13 +48,14 @@ function Profile() {
       label: "Users",
       value: "users",
     },
-
+    
     {
-      label: "All Bookings",
-      value: "allbookings",
+      label: "All bookings",
+      value: "bookings",
     },
+    
   ];
-
+   
   const isAdmin = currentUser && currentUser.isAdmin;
 
   return (

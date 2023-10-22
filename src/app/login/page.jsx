@@ -29,7 +29,6 @@ function Login() {
     event.preventDefault();
 
     const { email, password } = formData;
-    console.log("Form Data:", formData);
 
     try {
       dispatch(SetLoading(true));
@@ -46,18 +45,21 @@ function Login() {
       dispatch(SetLoading(false));
     }
   };
-   
+
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card color="transparent" className="mt-6 mb-16 p-14 rounded card-with-shadow">
+      <Card
+        color="transparent"
+        className="mt-16 mb-16 p-14 rounded card-with-shadow"
+      >
         <div className="text-center">
-        <Image
-                className="mx-auto"
-                src="/car-logo1.png"
-                width={250}
-                height={75}
-                alt="Picture of the brand"
-              />
+          <Image
+            className="mx-auto"
+            src="/car-logo1.png"
+            width={250}
+            height={75}
+            alt="Picture of the brand"
+          />
           <Typography className="mt-4" variant="h3" color="blue-gray">
             Sign In
           </Typography>

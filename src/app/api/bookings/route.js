@@ -53,7 +53,11 @@ export async function POST(request) {
       await validateTokenAndGetUserId(request);
       const { searchParams } = new URL(request.url);
       const user = searchParams.get("user");
-      const bookings = await Booking.find({ user })
+      const filters = {};
+      if (user) {
+        filters.user = user;
+      }
+      const bookings = await Booking.find(filters)
         .populate("car")
         .populate("user");
       return NextResponse.json({ data: bookings });
@@ -64,4 +68,3 @@ export async function POST(request) {
       );
     }
   }
-

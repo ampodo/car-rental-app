@@ -30,7 +30,6 @@ function Register() {
     event.preventDefault();
 
     const { name, email, password } = formData;
-    console.log("Form Data:", formData);
 
     try {
       dispatch(SetLoading(true));
@@ -48,12 +47,12 @@ function Register() {
       dispatch(SetLoading(false));
     }
   };
-  
+
   return (
     <div className="flex justify-center items-center h-screen">
       <Card
         color="transparent"
-        className="mt-6 mb-16 p-14 rounded card-with-shadow"
+        className="mt-6 mb-6 p-14 rounded card-with-shadow"
       >
         <div className="text-center">
           <Image
