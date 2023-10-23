@@ -121,7 +121,7 @@ function BookingsTable() {
 
   return (
     <div className="table-container">
-      <Table dataSource={bookings} columns={columns} />
+      <Table className="custom-table" dataSource={bookings} columns={columns} />
       {showCancelModel && (
         <Modal
           open={showCancelModel}

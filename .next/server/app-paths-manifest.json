@@ -1,8 +1,9 @@
 {
   "/page": "app/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/profile/page": "app/profile/page.js",
   "/login/page": "app/login/page.js",
-  "/api/bookings/route": "app/api/bookings/route.js",
+  "/cars/[carid]/page": "app/cars/[carid]/page.js",
+  "/api/cars/route": "app/api/cars/route.js",
+  "/api/users/logout/route": "app/api/users/logout/route.js",
   "/api/users/currentuser/route": "app/api/users/currentuser/route.js"
 }
