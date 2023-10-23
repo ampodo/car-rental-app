@@ -19,12 +19,15 @@ export async function getCars() {
 }
 
 export default async function Home() {
-
-   const cars = await getCars();
+  const cars = await getCars();
 
   return (
     <div className="mt-12 ml-8 mr-8">
-    <CarsGrid cars={cars} />
-  </div>
+      {Array.isArray(cars) && cars.length > 0 ? (
+        <CarsGrid cars={cars} />
+      ) : (
+        <div>No cars available.</div>
+      )}
+    </div>
   );
 }
