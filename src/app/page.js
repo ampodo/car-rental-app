@@ -5,8 +5,8 @@ import CarsGrid from "@/components/homeComponents/CarsGrid";
 
 export async function getCars() {
   try {
-    const cookieStore = cookies();
-    const token = cookieStore.get("token").value;
+    const cookeStore = cookies();
+    const token = cookeStore.get("token").value;
     const response = await axios.get(`${process.env.domain}/api/cars`, {
       headers: {
         Cookie: `token=${token}`,
@@ -19,15 +19,12 @@ export async function getCars() {
 }
 
 export default async function Home() {
-  const cars = await getCars();
+
+   const cars = await getCars();
 
   return (
     <div className="mt-12 ml-8 mr-8">
-      {Array.isArray(cars) && cars.length > 0 ? (
-        <CarsGrid cars={cars} />
-      ) : (
-        <div>No cars available.</div>
-      )}
-    </div>
+    <CarsGrid cars={cars} />
+  </div>
   );
 }
