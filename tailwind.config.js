@@ -14,6 +14,12 @@ module.exports = withMT({
       fontFamily: {
         sans: ['Open Sans', 'sans-serif'],
       },
+      screens: {
+        'sm': '375px',
+        'md': '640px',
+        'lg': '920px',
+        
+      },
       colors: {
         slate: {
           100: '#f0f4f8',

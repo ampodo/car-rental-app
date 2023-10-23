@@ -58,6 +58,16 @@ a {
 }
 
 
+/* Responsive table antd */
+
+.table-container {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  max-width: 100%; /* Make the table container 100% wide */
+}
+
+.ant-table-thead th {
+  min-width: 150px; /* Adjust the value according to your needs */
+}
 
 
 .ant-pagination .ant-pagination-item-active {
@@ -118,4 +128,12 @@ border-color: black !important;
 .card-with-shadow {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.cancel-action {
+
+    cursor: pointer;
+    color: red;
+    
+
 }

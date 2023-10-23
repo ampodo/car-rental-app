@@ -7,7 +7,7 @@ function CarsGrid({ cars }) {
   return (
     <div className="flex flex-col min-h-screen">
     <div className="flex-grow">
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4 mb-10">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4 mb-10">
       {cars.map((car) => (
         <div
           key={car._id}
@@ -23,7 +23,7 @@ function CarsGrid({ cars }) {
            onClick={() => router.push(`/cars/${car._id}`)}
           
           >
-            <h1 className="text-sm md:text-base hover:text-blue-500 transition-colors duration-300 ease-in-out">
+            <h1 className="text-lg md:text-base lg:text-sm hover:text-blue-500 transition-colors duration-300 ease-in-out">
             {car.brand} {car.name}
             </h1>
           </div>

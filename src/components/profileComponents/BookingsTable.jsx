@@ -51,18 +51,39 @@ function BookingsTable() {
 
   const columns = [
     {
+      title: "Action",
+      render: (record) => (
+        <div>
+          {record.status === "approved" && (
+            <span
+              className="cancel-action"
+              onClick={() => {
+                setSelectedBooking(record);
+                setShowCancelModel(true);
+              }}
+            >
+              Cancel
+            </span>
+          )}
+        </div>
+      ),
+    },
+
+    {
       title: "Booking Id",
       dataIndex: "_id",
     },
-    {
-      title: "User",
-      dataIndex: "user",
-      render: (user) => user.name,
-    },
+
     {
       title: "Car",
       dataIndex: "car",
       render: (car) => car.name,
+    },
+
+    {
+      title: "Client",
+      dataIndex: "user",
+      render: (user) => user.name,
     },
 
     {
@@ -81,7 +102,8 @@ function BookingsTable() {
     {
       title: "Status",
       dataIndex: "status",
-      render: (status) => status.toUpperCase(),
+      render: (status) =>
+        status && status.charAt(0).toUpperCase() + status.slice(1),
     },
 
     {
@@ -95,29 +117,10 @@ function BookingsTable() {
       dataIndex: "toSlot",
       render: (toSlot) => moment(toSlot).format("DD-MM-YYYY hh:mm A"),
     },
-
-    {
-      title: "Action",
-      render: (record) => (
-        <div>
-          {record.status === "approved" && (
-            <span
-              style={{ color: "red" }}
-              onClick={() => {
-                setSelectedBooking(record);
-                setShowCancelModel(true);
-              }}
-            >
-              Cancel
-            </span>
-          )}
-        </div>
-      ),
-    },
   ];
 
   return (
-    <div>
+    <div className="table-container">
       <Table dataSource={bookings} columns={columns} />
       {showCancelModel && (
         <Modal

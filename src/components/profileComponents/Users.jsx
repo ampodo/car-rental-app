@@ -8,8 +8,7 @@ import { useDispatch } from "react-redux";
 function Users() {
   const [users, setUsers] = React.useState([]);
   const dispatch = useDispatch();
-  
-  
+
   const getData = async () => {
     try {
       dispatch(SetLoading(true));
@@ -38,8 +37,22 @@ function Users() {
       dispatch(SetLoading(false));
     }
   };
-   
+
   const columns = [
+    {
+      title: "Status",
+      dataIndex: "isActive",
+      render: (isActive, record) => (
+        <select
+          value={isActive}
+          onChange={(e) => onUserUpdate(record._id, e.target.value)}
+        >
+          <option value={true}>Active</option>
+          <option value={false}>Inactive</option>
+        </select>
+      ),
+    },
+
     {
       title: "Name",
       dataIndex: "name",
@@ -58,23 +71,10 @@ function Users() {
       dataIndex: "updatedAt",
       render: (updatedAt) => moment(updatedAt).format("DD/MM/YYYY hh:mm A"),
     },
-    {
-      title: "Status",
-      dataIndex: "isActive",
-      render: (isActive, record) => (
-        <select
-          value={isActive}
-          onChange={(e) => onUserUpdate(record._id , e.target.value)}
-        >
-          <option value={true}>Active</option>
-          <option value={false}>Inactive</option>
-        </select>
-      ),
-    },
   ];
 
   return (
-    <div>
+    <div className="table-container">
       <Table dataSource={users} columns={columns} rowKey="_id" />
     </div>
   );

@@ -11,11 +11,12 @@ import Users from "@/components/profileComponents/Users";
 function Profile() {
   const { currentUser } = useSelector((state) => state.users);
 
-  const [activeTab, setActiveTab] = React.useState("general");
+  const [activeTab, setActiveTab] = React.useState("bookings");
 
   const tabComponents = {
-    general: <General />,
+
     bookings: <BookingsTable />,
+    general: <General />,
     cars: <Cars />,
     users: <Users />,
    
@@ -23,14 +24,16 @@ function Profile() {
   };
 
   const regularUserData = [
-    {
-      label: "General",
-      value: "general",
-    },
+
     {
       label: "Your Bookings",
       value: "bookings",
     },
+    {
+      label: "Profile",
+      value: "general",
+    },
+    
   ];
 
   const adminUserData = [

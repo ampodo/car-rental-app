@@ -52,30 +52,33 @@ function Register() {
     <div className="flex justify-center items-center h-screen">
       <Card
         color="transparent"
-        className="mt-6 mb-6 p-14 rounded card-with-shadow"
+        className="mt-16 mb-16 sm:px-7 py-8 md:p-12 lg:p-14 rounded card-with-shadow"
       >
-        <div className="text-center">
-          <Image
-            className="mx-auto"
-            src="/car-logo1.png"
-            width={250}
-            height={75}
-            alt="Picture of the brand"
-          />
+        <Image
+          className="mx-auto"
+          src="/car-logo1.png"
+          width={240}
+          height={75}
+          alt="Picture of the brand"
+        />
 
-          <Typography className="mt-4" variant="h3" color="blue-gray">
+        <div className="text-center">
+          <Typography
+            className="mt-4 sm:text-xl md:text-2xl font-semibold"
+            color="blue-gray"
+          >
             Sign Up
           </Typography>
           <Typography
             color="gray"
-            className="mt-2 font-normal text-base lg:text-lg"
+            className="mt-2 font-normal sm:text-sm md:text-base"
           >
-            Please register to start renting cars with us
+            Please register to start renting cars
           </Typography>
         </div>
         <form
           onSubmit={handleSubmit}
-          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 ml-auto mr-auto"
+          className="mt-8 mb-2 sm:w-64 md:w-96 max-w-screen-lg ml-auto mr-auto"
         >
           <div className="mb-4 flex flex-col gap-6">
             <Input
@@ -112,9 +115,15 @@ function Register() {
           <Button type="submit" className="mt-6" fullWidth>
             Register
           </Button>
-          <Typography color="gray" className="mt-4 text-center font-normal">
+          <Typography
+            color="gray"
+            className="mt-4 text-center font-normal sm:text-sm md:text-base"
+          >
             Already have an account?{" "}
-            <Link href="/login" className="font-medium text-gray-900">
+            <Link
+              href="/login"
+              className="font-medium text-gray-900 sm:text-sm md:text-base"
+            >
               Sign In
             </Link>
           </Typography>

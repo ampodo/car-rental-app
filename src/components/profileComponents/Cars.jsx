@@ -119,8 +119,7 @@ function Cars() {
     },
   ];
   return (
-    <div>
-     
+    <div className="table-container">
       <Table dataSource={cars} columns={columns} rowKey="_id" />
       <CarForm
         onCarAdded={addCar}

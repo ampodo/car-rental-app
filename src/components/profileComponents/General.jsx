@@ -59,13 +59,13 @@ function General() {
       dispatch(SetLoading(false));
     }
   };
-
+  
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card color="transparent" className="mb-20 p-10 rounded card-with-shadow">
+      <Card color="transparent" className="mb-24 sm:px-7 py-8 md:p-12 lg:p-14 rounded card-with-shadow">
         <form
           onSubmit={handleSubmit}
-          className="mt-4 mb-2 w-80 max-w-screen-lg sm:w-96 ml-auto mr-auto"
+          className="mt-8 mb-2 sm:w-64 md:w-96 max-w-screen-lg ml-auto mr-auto"
         >
           <div className="mb-4 flex flex-col gap-6">
             <Input
