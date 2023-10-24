@@ -22,7 +22,7 @@
     "mongodb": "^6.0.0",
     "mongoose": "^7.5.0",
     "multer": "^1.4.5-lts.1",
-    "next": "13.4.19",
+    "next": "^13.4.9",
     "nodemailer": "^6.9.4",
     "postcss": "8.4.28",
     "prop-types": "^15.8.1",

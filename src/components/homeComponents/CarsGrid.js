@@ -2,7 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-function CarsGrid({ cars = [] }) {
+function CarsGrid({cars}) {
   
   const router = useRouter();
 

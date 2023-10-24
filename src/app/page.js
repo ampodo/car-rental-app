@@ -12,20 +12,18 @@ export async function getCars() {
         Cookie: `token=${token}`,
       },
     });
-    return response.data.data || [];
+    return response.data.data;
   } catch (error) {
-    console.error("Error fetching cars:", error);
-    return [];
+    throw error;
   }
 }
 
 export default async function Home() {
-
-   const cars = await getCars();
+  const cars = await getCars();
 
   return (
     <div className="mt-12 ml-8 mr-8">
-    <CarsGrid cars={cars} />
-  </div>
+      <CarsGrid cars={cars} />
+    </div>
   );
 }
