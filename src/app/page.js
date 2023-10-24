@@ -12,9 +12,10 @@ export async function getCars() {
         Cookie: `token=${token}`,
       },
     });
-    return response.data.data;
+    return response.data.data || [];
   } catch (error) {
-    throw error;
+    console.error("Error fetching cars:", error);
+    return [];
   }
 }
 

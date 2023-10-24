@@ -2,18 +2,9 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-function CarsGrid({cars}) {
+function CarsGrid({ cars = [] }) {
   
   const router = useRouter();
-
-  if (!cars || cars.length === 0) {
-    // Handle the case where the 'cars' array is not available or is empty
-    return (
-      <div className="text-center">
-        <p>No cars available at the moment.</p>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col min-h-screen">
