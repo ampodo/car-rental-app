@@ -4,10 +4,13 @@ import { cookies } from "next/headers";
 import CarsGrid from "@/components/homeComponents/CarsGrid";
 
 export async function getCars() {
+
+  const apiUrl = process.env.domain;
+
   try {
     const cookeStore = cookies();
     const token = cookeStore.get("token").value;
-    const response = await axios.get(`${process.env.domain}/api/cars`, {
+    const response = await axios.get(`${apiUrl}/api/cars`, {
       headers: {
         Cookie: `token=${token}`,
       },
@@ -23,7 +26,7 @@ export default async function Home() {
 
   return (
     <div className="mt-12 ml-8 mr-8">
-      <CarsGrid cars={cars} />
+      Hello
     </div>
   );
 }

@@ -4,11 +4,13 @@ import { cookies } from "next/headers";
 import CarInformation from "@/components/information/CarInformation";
 
 export async function getCar(carid) {
+
+  const apiUrl = process.env.domain;
+
   try {
     const cookieStore = cookies();
     const token = cookieStore.get("token").value;
-    const response = await axios.get(
-      `${process.env.domain}/api/cars/${carid}`,
+    const response = await axios.get(`${apiUrl}/api/cars/${carid}`,
       {
         headers: {
           Cookie: `token=${token}`,
