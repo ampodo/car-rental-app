@@ -10,7 +10,7 @@ function CarsGrid({cars}) {
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4 mb-10">
-          {cars.map((car) => (
+          {cars?.map((car) => (
             <div key={car._id}>
               <img
                 src={car.image}
