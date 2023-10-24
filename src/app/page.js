@@ -26,7 +26,7 @@ export default async function Home() {
 
   return (
     <div className="mt-12 ml-8 mr-8">
-      Hello
+     <CarsGrid cars={cars} />
     </div>
   );
 }
