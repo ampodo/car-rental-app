@@ -6,7 +6,6 @@ import { useSelector} from "react-redux";
 import Spinner from "./Spinner";
 import { SimpleFooter } from "./Footer";
 
-
 function LayoutProvider({ children }) {
 
   const {loading} = useSelector((state) => state.loaders);

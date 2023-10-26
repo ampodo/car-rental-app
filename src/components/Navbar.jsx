@@ -21,12 +21,14 @@ function NavList() {
   const pathname = usePathname();
   const dispatch = useDispatch();
 
+
   const getCurrentUser = async () => {
     try {
       dispatch(SetLoading(true));
       const response = await axios.get("/api/users/currentuser");
       dispatch(SetCurrentUser(response.data.data));
     } catch (error) {
+      message.error(error.response.data.message || error.message);
     } finally {
       dispatch(SetLoading(false));
     }
@@ -35,54 +37,44 @@ function NavList() {
   const onLogout = async () => {
     try {
       dispatch(SetLoading(true));
-
-      // Clear the token from the client-side
-      dispatch(SetCurrentUser(null));
-
-      // Clear the token from the server-side (using a serverless function)
-      await fetch("/api/users/logout", {
-        method: "GET",
-        credentials: "include", // Include credentials to send cookies
-      });
-
-      message.success("You are logged out");
+      await axios.get("/api/users/logout");
+      message.success("Logged out successfully");
       router.push("/login");
     } catch (error) {
-      console.error("Error during logout:", error);
-      // Handle any errors
+      message.error(error.response.data.message || error.message);
     } finally {
       dispatch(SetLoading(false));
     }
   };
-
+  
   useEffect(() => {
     if (pathname !== "/login" && pathname !== "/register") {
       getCurrentUser();
     }
   }, [pathname]);
 
-  const handleUsernameClick = () => {
-    router.push("/profile");
-  };
 
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      {currentUser ? (
+      
         <Typography as="li" variant="h5" className="p-1 font-medium">
           <a
             href="#"
             className="user-name hover-blue"
-            onClick={handleUsernameClick}
+            onClick={() => {
+              router.push("/profile");
+            }}
           >
-            {currentUser.name}
+            {currentUser?.name}
           </a>
         </Typography>
-      ) : null}
+      
 
-      <a href="#" className="flex items-center" onClick={onLogout}>
+      <a href="#" className="flex items-center">
         <i
           className="ri-logout-circle-r-line hover:text-blue-500 transition-colors duration-300 ease-in-out"
           style={{ fontSize: "24px" }}
+          onClick={onLogout}
         ></i>
       </a>
     </ul>
@@ -125,7 +117,7 @@ export function NavbarSimple() {
                 src="/header-logo.png"
                 width={150}
                 height={65}
-                alt="Picture of the author"
+                alt="Picture of the car"
               />
             </Typography>
             <div className="hidden lg:block">
@@ -152,3 +144,5 @@ export function NavbarSimple() {
     </div>
   );
 }
+
+
