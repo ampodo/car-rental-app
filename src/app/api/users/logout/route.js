@@ -7,13 +7,10 @@ export async function GET() {
       { status: 200 }
     );
 
-  
-    // clear cookie
-    
+    // Clear the "token" cookie
     response.cookies.delete("token");
 
     return response;
- 
   } catch (error) {
     return NextResponse.json(
       { data: null, message: error.message },
@@ -21,3 +18,4 @@ export async function GET() {
     );
   }
 }
+
