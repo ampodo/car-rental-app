@@ -69,11 +69,10 @@ function NavList() {
         </Typography>
       ) : null}
 
-      <a href="#" className="flex items-center">
+      <a href="#" className="flex items-center" onClick={onLogout}>
         <i
           className="ri-logout-circle-r-line hover:text-blue-500 transition-colors duration-300 ease-in-out"
           style={{ fontSize: "24px" }}
-          onClick={onLogout}
         ></i>
       </a>
     </ul>
