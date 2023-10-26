@@ -1,19 +1,23 @@
 import React, { useEffect } from "react";
-import { Navbar, Collapse, Typography, IconButton } from "@material-tailwind/react";
+import {
+  Navbar,
+  Collapse,
+  Typography,
+  IconButton,
+} from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useRouter, usePathname } from "next/navigation";
 import axios from "axios";
 import { message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { SetCurrentUser } from "@/redux/userSlice";
 import { SetLoading } from "@/redux/loadersSlice";
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
-import Link from "next/link";
 
 function NavList() {
   const { currentUser } = useSelector((state) => state.users);
 
-  
+  const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
 
@@ -31,10 +35,21 @@ function NavList() {
   const onLogout = async () => {
     try {
       dispatch(SetLoading(true));
-      await axios.get("/api/users/logout");
+
+      // Clear the token from the client-side
       dispatch(SetCurrentUser(null));
+
+      // Clear the token from the server-side (using a serverless function)
+      await fetch("/api/users/logout", {
+        method: "GET",
+        credentials: "include", // Include credentials to send cookies
+      });
+
       message.success("You are logged out");
+      router.push("/login");
     } catch (error) {
+      console.error("Error during logout:", error);
+      // Handle any errors
     } finally {
       dispatch(SetLoading(false));
     }
@@ -46,28 +61,30 @@ function NavList() {
     }
   }, [pathname]);
 
-  
+  const handleUsernameClick = () => {
+    router.push("/profile");
+  };
 
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       {currentUser ? (
         <Typography as="li" variant="h5" className="p-1 font-medium">
-          <Link href="/profile"> {/* Use Link for profile */}
-            <a className="user-name hover-blue">
-              {currentUser.name}
-            </a>
-          </Link>
+          <a
+            href="#"
+            className="user-name hover-blue"
+            onClick={handleUsernameClick}
+          >
+            {currentUser.name}
+          </a>
         </Typography>
       ) : null}
 
-      <Link href="/login"> {/* Use Link for logout */}
-        <a className="flex items-center" onClick={onLogout}>
-          <i
-            className="ri-logout-circle-r-line hover:text-blue-500 transition-colors duration-300 ease-in-out"
-            style={{ fontSize: "24px" }}
-          ></i>
-        </a>
-      </Link>
+      <a href="#" className="flex items-center" onClick={onLogout}>
+        <i
+          className="ri-logout-circle-r-line hover:text-blue-500 transition-colors duration-300 ease-in-out"
+          style={{ fontSize: "24px" }}
+        ></i>
+      </a>
     </ul>
   );
 }
@@ -116,7 +133,7 @@ export function NavbarSimple() {
             </div>
             <IconButton
               variant="text"
-              className="ml-auto h-6 w-6 text-inherit hover-bg-transparent focus-bg-transparent active-bg-transparent lg:hidden"
+              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
               ripple={false}
               onClick={() => setOpenNav(!openNav)}
             >
@@ -135,4 +152,3 @@ export function NavbarSimple() {
     </div>
   );
 }
-
