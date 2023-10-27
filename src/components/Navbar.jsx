@@ -39,6 +39,9 @@ function NavList() {
       dispatch(SetLoading(true));
       await axios.get("/api/users/logout");
       message.success("Logged out successfully");
+
+      localStorage.removeItem("token");
+
       router.push("/login");
     } catch (error) {
       message.error(error.response.data.message || error.message);
