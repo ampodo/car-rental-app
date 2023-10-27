@@ -52,7 +52,7 @@ function Register() {
     <div className="flex justify-center items-center h-screen">
       <Card
         color="transparent"
-        className="mt-16 mb-16 sm:px-7 py-8 md:p-12 lg:p-14 rounded card-with-shadow"
+        className="mt-16 mb-16 sm:px-7 py-8 md:p-12 lg:p-14 shadow-2xl rounded"
       >
         <Image
           className="mx-auto"

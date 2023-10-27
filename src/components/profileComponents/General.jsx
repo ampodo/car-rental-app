@@ -59,10 +59,13 @@ function General() {
       dispatch(SetLoading(false));
     }
   };
-  
+
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card color="transparent" className="mb-24 sm:px-7 py-8 md:p-12 lg:p-14 rounded card-with-shadow">
+      <Card
+        color="transparent"
+        className="mb-24 sm:px-7 py-8 md:p-12 lg:p-14 shadow-2xl rounded"
+      >
         <form
           onSubmit={handleSubmit}
           className="mt-8 mb-2 sm:w-64 md:w-96 max-w-screen-lg ml-auto mr-auto"

@@ -24,7 +24,7 @@ function Login() {
       [name]: value,
     });
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -48,10 +48,7 @@ function Login() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card
-        
-        className="mt-16 mb-16 sm:px-6 py-8 md:p-12 lg:p-14 rounded card-with-shadow"
-      >
+      <Card className="mt-16 mb-16 sm:px-6 py-8 md:p-12 lg:p-14 shadow-2xl rounded">
         <Image
           className="mx-auto"
           src="/car-logo1.png"
@@ -87,18 +84,18 @@ function Login() {
               required
               onChange={handleChange}
             />
-            
-            <div style={{ marginTop: '20px' }}>
-            <Input
-              type="password"
-              size="lg"
-              label="Password"
-              name="password"
-              pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z!@#$%^&*\d]{8,}$"
-              title="Password must contain at least 1 capital letter, 1 symbol, and be at least 8 characters long."
-              required
-              onChange={handleChange}
-            />
+
+            <div style={{ marginTop: "20px" }}>
+              <Input
+                type="password"
+                size="lg"
+                label="Password"
+                name="password"
+                pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z!@#$%^&*\d]{8,}$"
+                title="Password must contain at least 1 capital letter, 1 symbol, and be at least 8 characters long."
+                required
+                onChange={handleChange}
+              />
             </div>
           </div>
 
