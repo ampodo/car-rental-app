@@ -60,7 +60,7 @@ function NavList() {
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       
-        <Typography as="li" variant="h5" className="p-1 font-medium">
+        <Typography as="li" variant="h6" className="p-1 font-medium">
           <a
             href="#"
             className="user-name hover-blue"
@@ -68,7 +68,7 @@ function NavList() {
               router.push("/profile");
             }}
           >
-            {currentUser?.name}
+            {currentUser?.email}
           </a>
         </Typography>
       
