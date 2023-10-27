@@ -120,8 +120,9 @@ function CarInformation({ car }) {
       </Button>
     </div>
 
-    <div className="mt-12 flex flex-row items-center gap-5">
+    <div className="mt-12 flex flex-row items-center">
       <Button
+        style={{ marginRight: '15px' }}
         size="md"
         variant="outlined"
         onClick={() => {

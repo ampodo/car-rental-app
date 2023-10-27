@@ -26,6 +26,13 @@
     }
   }
 
-  
+  @media (max-width: 420px) {
+    .spinner {
+      
+      height: 50px;
+      width: 50px;
+      margin: 0 auto;
+    }
+  }
 
   

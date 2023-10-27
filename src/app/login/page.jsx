@@ -49,7 +49,7 @@ function Login() {
   return (
     <div className="flex justify-center items-center h-screen">
       <Card
-        color="transparent"
+        
         className="mt-16 mb-16 sm:px-6 py-8 md:p-12 lg:p-14 rounded card-with-shadow"
       >
         <Image
@@ -77,7 +77,7 @@ function Login() {
           onSubmit={handleSubmit}
           className="mt-8 mb-2 sm:w-64 md:w-96 max-w-screen-lg ml-auto mr-auto"
         >
-          <div className="mb-4 flex flex-col gap-6">
+          <div className="mb-4 flex flex-col">
             <Input
               type="email"
               size="lg"
@@ -87,6 +87,8 @@ function Login() {
               required
               onChange={handleChange}
             />
+            
+            <div style={{ marginTop: '20px' }}>
             <Input
               type="password"
               size="lg"
@@ -97,6 +99,7 @@ function Login() {
               required
               onChange={handleChange}
             />
+            </div>
           </div>
 
           <Button type="submit" className="mt-6" fullWidth>

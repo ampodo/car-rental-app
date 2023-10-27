@@ -54,7 +54,10 @@ module.exports = withMT({
           800: '#333333',
           900: '#1A1A1A',
         },
-       // Add more color variations as needed
+        'gray-50': 'rgb(249 250 251)',
+        'gray-100': 'rgb(243 244 246)',
+        'gray-200': 'rgb(229 231 235)',
+        'gray-300': 'rgb(209 213 219)',
       },
     },
   },

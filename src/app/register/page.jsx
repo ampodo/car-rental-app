@@ -80,7 +80,7 @@ function Register() {
           onSubmit={handleSubmit}
           className="mt-8 mb-2 sm:w-64 md:w-96 max-w-screen-lg ml-auto mr-auto"
         >
-          <div className="mb-4 flex flex-col gap-6">
+          <div className="mb-4 flex flex-col">
             <Input
               size="lg"
               label="Name"
@@ -91,25 +91,30 @@ function Register() {
               required
               onChange={handleChange}
             />
-            <Input
-              type="email"
-              size="lg"
-              label="Email"
-              name="email"
-              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-              required
-              onChange={handleChange}
-            />
-            <Input
-              type="password"
-              size="lg"
-              label="Password"
-              name="password"
-              pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z!@#$%^&*\d]{8,}$"
-              title="Password must contain at least 1 capital letter, 1 symbol, and be at least 8 characters long."
-              required
-              onChange={handleChange}
-            />
+
+            <div style={{ marginTop: "20px" }}>
+              <Input
+                type="email"
+                size="lg"
+                label="Email"
+                name="email"
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                required
+                onChange={handleChange}
+              />
+            </div>
+            <div style={{ marginTop: "20px" }}>
+              <Input
+                type="password"
+                size="lg"
+                label="Password"
+                name="password"
+                pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z!@#$%^&*\d]{8,}$"
+                title="Password must contain at least 1 capital letter, 1 symbol, and be at least 8 characters long."
+                required
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           <Button type="submit" className="mt-6" fullWidth>
