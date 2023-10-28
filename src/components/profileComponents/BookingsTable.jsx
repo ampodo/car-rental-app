@@ -83,7 +83,7 @@ function BookingsTable() {
     {
       title: "Client",
       dataIndex: "user",
-      render: (user) => user.name,
+      render: (user) => user && user.name,
     },
 
     {

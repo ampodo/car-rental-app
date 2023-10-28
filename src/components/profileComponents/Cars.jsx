@@ -35,7 +35,7 @@ function Cars() {
     getData();
   };
 
-  // Delete car items from the table**
+  // Delete car items from the table
   const deleteCar = async (carId) => {
     try {
       dispatch(SetLoading(true));
