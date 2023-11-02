@@ -98,7 +98,7 @@ function Register() {
                 size="lg"
                 label="Email"
                 name="email"
-                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                pattern="[a-zA-Z0-9._%+\-]{3,}@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                 required
                 onChange={handleChange}
               />
