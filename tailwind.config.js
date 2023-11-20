@@ -16,8 +16,8 @@ module.exports = withMT({
       },
       screens: {
         'sm': '375px',
-        'md': '640px',
-        'lg': '920px',
+        'md': '768px',
+        'lg': '1024px',
         
       },
       colors: {
@@ -32,16 +32,16 @@ module.exports = withMT({
           800: '#354c5d',
           900: '#2c3e4d',
         },
-        sky: { // Use "sky" instead of "cyan"
-          100: '#E0FFFF',
-          200: '#B0E0E6',
-          300: '#87CEEB',
-          400: '#00BFFF',
-          500: '#1E90FF',
-          600: '#4682B4',
-          700: '#5F9EA0',
-          800: '#00CED1',
-          900: '#20B2AA',
+        blue: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#87CEEB',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2196f3',
+          700: '#1d4ed8',
+          800: '#1e40af',
         },
         zinc: { // Add the "zinc" color palette
           100: '#F5F5F5',
