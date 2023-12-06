@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { cookies } from "next/headers";
-import CarInformation from "@/components/information/CarInformation";
+import CarInformation from "@/components/singlepageCar/CarInformation";
 
 export async function getCar(carid) {
 
