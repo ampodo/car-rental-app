@@ -18,3 +18,6 @@ This app uses serverless authentication and employs token validation to ensure t
 
 
 ![Car grid](https://github.com/ampodo/car-rental-app/blob/main/gird%20card.png)
+
+
+![Admin panel](https://github.com/ampodo/car-rental-app/blob/main/admin%20panel.png)
