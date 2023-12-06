@@ -16,3 +16,5 @@ Redux toolkit capabilities are utilized in this application for managing user- a
 This app uses serverless authentication and employs token validation to ensure the security and integrity of a user log-in and log-out process. Each time the user logs in, a new JWT token is generated with a unique set of characters.
 
 
+
+![Car grid](https://github.com/ampodo/car-rental-app/blob/main/gird%20card.png)
